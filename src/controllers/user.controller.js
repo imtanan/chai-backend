@@ -82,10 +82,14 @@ const loginUser = asyncHandler(async (req, res) => {
   //if exists, session login true and give them access and later refresh tokens otherwise show them message of incorrect email or password
   const { username, email, password } = req.body;
   console.log(email);
+  if (!username && !email) {
+    throw new ApiError(400, "username or email is required");
+  }
+  /*
   if (!(username || email)) {
     throw new ApiError(400, "Enter username or email");
   }
-
+*/
   const user = await User.findOne({
     $or: [{ email }, { username }],
   });
@@ -126,8 +130,8 @@ const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user._id,
     {
-      $set: {
-        refreshToken: undefined,
+      $unset: {
+        refreshToken: 1,
       },
     },
     {

@@ -10,7 +10,7 @@ const userSchema = new Schema(
       unique: true,
       lowercase: true,
       trim: true,
-      index: true, //for better searching(if somone wanna search a user )
+      index: true, //for better searching(if someone wanna search a user )
     },
     email: {
       type: String,
