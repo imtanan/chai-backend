@@ -34,6 +34,7 @@ const videoSchema = new Schema(
     owner: {
       type: Schema.Types.ObjectId, //uploader’s userId
       ref: "User",
+      required: true,
     },
   },
   {
