@@ -1,0 +1,1660 @@
+{
+  "info": {
+    "_postman_id": "9b2053aa-9ae7-49b3-a1f9-5103ac825a60",
+    "name": "youtubechai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "44474316"
+  },
+  "item": [
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "current-user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response  = pm.response.json()\r",
+                  "pm.environment.set(\"userId\", response.data._id)"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/users/current-user",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "current-user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "change-password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"oldPassword\" : \"12345678\",\r\n    \"newPassword\": \"abcdef\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/users/change-password",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "change-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update-account",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"fullName\": \"ahnaf\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/users/update-account",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "update-account"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "upload avatar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "uuid": "e2b17657-a4a1-4f33-8ed1-a481cefed4c0",
+                  "src": "postman-cloud:///1f11a6fd-199d-4dd0-a0e3-cf567b28c2c6"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{server}}/users/avatar",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "avatar"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "upload cover image",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "coverImage",
+                  "type": "file",
+                  "uuid": "180c07fe-c447-4740-b09e-68f36f3b1fe8",
+                  "src": "/C:/Users/Asus/Desktop/coverImage.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{server}}/users/cover-image",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "cover-image"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "channel profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/users/c/{{username}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "c",
+                "{{username}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "watch history",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/users/history",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "history"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "refresh-token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{refreshToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/users/refresh-token",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "fullName",
+                  "value": "Ahnaf shayan",
+                  "type": "text",
+                  "uuid": "586d2507-b1ec-4b93-9c68-f981fe391433"
+                },
+                {
+                  "key": "username",
+                  "value": "ahnaf",
+                  "type": "text",
+                  "uuid": "a7b83195-3523-4311-b9e6-6f25766eda10"
+                },
+                {
+                  "key": "password",
+                  "value": "12345678",
+                  "type": "text",
+                  "uuid": "6fb90cc5-edb0-47e2-80ed-db4b75d64a54"
+                },
+                {
+                  "key": "email",
+                  "value": "ahnaf@gmail.com",
+                  "type": "text",
+                  "uuid": "c5fd232c-57d0-4f06-abf1-7caa3f7fe17f"
+                },
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "uuid": "d56570d7-ea12-49e9-b675-5798ae2d8c33",
+                  "src": "/C:/Users/Asus/Desktop/avatar.jpg.jfif"
+                },
+                {
+                  "key": "coverImage",
+                  "type": "file",
+                  "uuid": "556a3676-7ad5-4953-ac40-da3a624f7a15",
+                  "src": "/C:/Users/Asus/Desktop/coverImage.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{server}}/users/register",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();\r",
+                  "pm.environment.set(\"accessToken\",response.data.accessToken);\r",
+                  "pm.environment.set(\"refreshToken\",response.data.refreshToken);\r",
+                  "pm.environment.set(\"username\",response.data.user.username);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"imtanan@gmail.com\",\n  \"password\": \"abcdef\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/users/login",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/users/logout",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "dashboard",
+      "item": [
+        {
+          "name": "channelStats",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/dashboard/stats",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "dashboard",
+                "stats"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "channelVideos",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/dashboard/videos",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "dashboard",
+                "videos"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "comment",
+      "item": [
+        {
+          "name": "getvideoComments",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/comments/{{videoId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "comments",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "addComment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"content\": \"The comment is for testing purpose\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/comments/{{videoId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "comments",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateComment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"content\": \"This video is worthit, would definitely smash the sub btn (This one is edited)\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/comments/c/{{commentId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "comments",
+                "c",
+                "{{commentId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deleteComment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"content\": \"The comment is for testing purpose\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/comments/c/{{commentId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "comments",
+                "c",
+                "{{commentId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "tweet",
+      "item": [
+        {
+          "name": "createTweet",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"content\": \"This is my third tweet for getting deleted\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/tweets/",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "tweets",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getUserTweets",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"content\": \"The comment is for testing purpose\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/tweets/user/{{userId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "tweets",
+                "user",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateTweets",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"content\": \"This is the edited 2nd tweet\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/tweets/{{tweetId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "tweets",
+                "{{tweetId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deleteTweet",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/tweets/{{tweetId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "tweets",
+                "{{tweetId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "like",
+      "item": [
+        {
+          "name": "toggleVideoLikes",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/likes/toggle/v/{{videoId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "likes",
+                "toggle",
+                "v",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "toggleCommentLike",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/likes/toggle/c/{{commentId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "likes",
+                "toggle",
+                "c",
+                "{{commentId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "toggleTweetLike",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/likes/toggle/t/{{tweetId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "likes",
+                "toggle",
+                "t",
+                "{{tweetId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getLikedVideos",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/likes/videos/",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "likes",
+                "videos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "video",
+      "item": [
+        {
+          "name": "publishAVideo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json()\r",
+                  "pm.environment.set(\"videoId\", response.data._id)\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Anotherone",
+                  "type": "text",
+                  "uuid": "8ce620a5-ce51-4a61-b8ae-35891cf29398"
+                },
+                {
+                  "key": "description",
+                  "value": "It's test for getAllVideos",
+                  "type": "text",
+                  "uuid": "c78ef5ab-735a-42a4-8a15-dc40096c145a"
+                },
+                {
+                  "key": "thumbnail",
+                  "type": "file",
+                  "uuid": "15630319-9159-4769-9d28-d5890d78399d",
+                  "src": "/C:/Users/Asus/Desktop/coverImage.jfif"
+                },
+                {
+                  "key": "videoFile",
+                  "type": "file",
+                  "uuid": "dfcd232d-85c0-47f6-a40b-9621efd0fd79",
+                  "src": "/C:/Users/Asus/Desktop/AQNms-5HxDVgnrosM-Jkk36YKmVOwQm8zGfkF6V0bbl_e00xDQ0F8zouCOsjB7LHTC9iyATc_wXw6t7Dmp0F3UwRqgzANXwyK5pD7WeW3w.mp4"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{server}}/videos/",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "videos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getAllvideos",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/videos/",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "videos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getVideoById",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/videos/{{videoId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateVideoThumbnail",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "thumbnail",
+                  "type": "file",
+                  "uuid": "3b30e593-427e-4b99-805d-c539fc4b6467",
+                  "src": "/C:/Users/Asus/Desktop/coverImage.jfif"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{server}}/videos/{{videoId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "togglePublishStatus",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "thumbnail",
+                  "type": "file",
+                  "uuid": "3b30e593-427e-4b99-805d-c539fc4b6467",
+                  "src": "/C:/Users/Asus/Desktop/coverImage.jfif"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{server}}/videos/toggle/publish/{{videoId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "videos",
+                "toggle",
+                "publish",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deleteAVideo",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/videos/{{videoId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "playlist",
+      "item": [
+        {
+          "name": "createPlaylist",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"TEST\",\r\n    \"description\":\"Its a test\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/playlist/",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "playlist",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getUserPlaylist",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"TEST\",\r\n    \"description\":\"Its a test\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/playlist/user/{{userId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "playlist",
+                "user",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getPlaylistByID",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"TEST\",\r\n    \"description\":\"Its a test\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/playlist/{{playlistId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "playlist",
+                "{{playlistId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updatePlaylist",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Just NAME of it\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/playlist/{{playlistId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "playlist",
+                "{{playlistId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deletePlaylist",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"TEST\",\r\n    \"description\":\"Its a test\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/playlist/{{playlistId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "playlist",
+                "{{playlistId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "addVideoToPlaylist",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"TEST\",\r\n    \"description\":\"Its a test\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/playlist/add/{{videoId}}/{{playlistId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "playlist",
+                "add",
+                "{{videoId}}",
+                "{{playlistId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "removeVideoFromPlaylist",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"TEST\",\r\n    \"description\":\"Its a test\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/playlist/remove/{{videoId}}/{{playlistId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "playlist",
+                "remove",
+                "{{videoId}}",
+                "{{playlistId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "subscription",
+      "item": [
+        {
+          "name": "getUserChannelSubs",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"TEST\",\r\n    \"description\":\"Its a test\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/subscriptions/c/{{channelId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "subscriptions",
+                "c",
+                "{{channelId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "toggleSubscription",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"TEST\",\r\n    \"description\":\"Its a test\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/subscriptions/c/{{channelId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "subscriptions",
+                "c",
+                "{{channelId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getSubscribedChannels",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"TEST\",\r\n    \"description\":\"Its a test\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/subscriptions/u/{{userId}}",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "subscriptions",
+                "u",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "healthCheck",
+      "item": [
+        {
+          "name": "healthCheck",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/healthcheck/",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "healthcheck",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
