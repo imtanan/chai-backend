@@ -99,18 +99,20 @@ const getVideoById = asyncHandler(async (req, res) => {
 const updateVideo = asyncHandler(async (req, res) => {
   const { videoId } = req.params;
   //TODO: update video details like title, description, thumbnail
-  const { title, description } = req.body;
-  if (!title || !description) {
-    throw new ApiError(400, "Title and Descritpion are required");
+  const { title, description } = req.body || {};
+  const $updateFields = {};
+  if (title && title.trim() !== "") {
+    $updateFields.title = title;
+  }
+  if (description && description.trim() !== "") {
+    $updateFields.description = description;
   }
   const thumbnailLocalPath = req.files?.thumbnail[0]?.path;
   const userId = req.user._id;
-  if (!thumbnailLocalPath) {
-    throw new ApiError(400, "No Thumbnail Found");
-  }
-  const uploadedThumbnail = await uploadOnCloudinary(thumbnailLocalPath);
-  if (!uploadedThumbnail?.url) {
-    throw new ApiError(500, "Thumbnail upload failed");
+
+  if (thumbnailLocalPath) {
+    const uploadedThumbnail = await uploadOnCloudinary(thumbnailLocalPath);
+    $updateFields.thumbnail = uploadedThumbnail.url;
   }
   if (!mongoose.isValidObjectId(userId)) {
     throw new ApiError(400, "Invalid User ID");
@@ -125,11 +127,7 @@ const updateVideo = asyncHandler(async (req, res) => {
       owner: userId,
     },
     {
-      $set: {
-        title,
-        description,
-        thumbnail: uploadedThumbnail.url,
-      },
+      $set: $updateFields,
     },
     { new: true }
   );

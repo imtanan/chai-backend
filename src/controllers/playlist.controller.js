@@ -11,6 +11,7 @@ const createPlaylist = asyncHandler(async (req, res) => {
   }
   //TODO: create playlist
   const { videoId } = req.params;
+  console.log("videoId: ", videoId);
   const userId = req.user._id;
   if (!mongoose.isValidObjectId(userId)) {
     throw new ApiError(400, "Invalid user Id");
@@ -23,7 +24,7 @@ const createPlaylist = asyncHandler(async (req, res) => {
   const createdPlaylist = await Playlist.create({
     name,
     description,
-    videos: [videoId],
+    videos: videoId ? [videoId] : [],
     owner: userId,
   });
 
@@ -179,8 +180,8 @@ const updatePlaylist = asyncHandler(async (req, res) => {
   if (!mongoose.isValidObjectId(playlistId)) {
     throw new ApiError(404, "Invalid playlist ID");
   }
-  if (!name || !description) {
-    throw new ApiError(400, "Name and description are required");
+  if (!name && !description) {
+    throw new ApiError(400, "please write name, desc that you want to edit");
   }
 
   const updatedPlaylist = await Playlist.findOneAndUpdate(

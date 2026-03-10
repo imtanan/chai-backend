@@ -23,7 +23,7 @@ const getVideoComments = asyncHandler(async (req, res) => {
     },
   ]);
   if (!comments.length) {
-    throw new ApiError(404, "No comments found");
+    return res.status(200).json(new ApiResponse(404, "No comments found"));
   }
 
   return res
@@ -91,17 +91,14 @@ const deleteComment = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Comment ID not Found");
   }
 
-  const comment = await Comment.findById(commentId);
-  if (!comment) {
-    throw new ApiError(400, "Comment not found");
-  }
+  const deletedComment = await Comment.findOneAndDelete({
+    _id: commentId,
+    owner: req.user._id,
+  });
 
-  if (comment.owner.toString() !== req.user._id.toString()) {
-    // we will add a condition for the channel owner so he could delete others comments tooo
-    throw new ApiError(403, "you can only Delete your own comment");
+  if (!deletedComment) {
+    throw new ApiError(404, "Comment not found or you are not the owner");
   }
-
-  const deletedComment = await comment.remove();
   return res
     .status(200)
     .json(

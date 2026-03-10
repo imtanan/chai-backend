@@ -8,7 +8,14 @@ import mongoose from "mongoose";
 
 const generateAccessAndRefereshTokens = async (userId) => {
   try {
+    console.log("ACCESS SECRET:", process.env.ACCESS_TOKEN_SECRET);
+    console.log("REFRESH SECRET:", process.env.REFRESH_TOKEN_SECRET);
     const user = await User.findById(userId);
+    //
+    if (!user) {
+      throw new ApiError(404, "User not found for token generation");
+    }
+    //
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
 
@@ -17,9 +24,10 @@ const generateAccessAndRefereshTokens = async (userId) => {
 
     return { accessToken, refreshToken };
   } catch (error) {
+    console.log("TOKEN ERROR:", error);
     throw new ApiError(
       500,
-      "Something went wrong while generating referesh and access token"
+      "Something went wrong while generating refresh and access token"
     );
   }
 };
@@ -103,7 +111,7 @@ const loginUser = asyncHandler(async (req, res) => {
   // username or email
   //find the user
   //password check
-  //access and referesh token
+  //access and refresh token
   //send cookie
 
   const { email, username, password } = req.body;
@@ -217,17 +225,18 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       secure: true,
     };
 
-    const { accessToken, newRefreshToken } =
-      await generateAccessAndRefereshTokens(user._id);
+    const { accessToken, refreshToken } = await generateAccessAndRefereshTokens(
+      user._id
+    );
 
     return res
       .status(200)
       .cookie("accessToken", accessToken, options)
-      .cookie("refreshToken", newRefreshToken, options)
+      .cookie("refreshToken", refreshToken, options)
       .json(
         new ApiResponse(
           200,
-          { accessToken, refreshToken: newRefreshToken },
+          { accessToken, refreshToken },
           "Access token refreshed"
         )
       );
@@ -263,7 +272,7 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 const updateAccountDetails = asyncHandler(async (req, res) => {
   const { fullName, email } = req.body;
 
-  if (!fullName || !email) {
+  if (!fullName && !email) {
     throw new ApiError(400, "All fields are required");
   }
 

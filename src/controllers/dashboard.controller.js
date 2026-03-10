@@ -31,7 +31,18 @@ const getChannelStats = asyncHandler(async (req, res) => {
     },
   ]);
   if (!owner.length) {
-    throw new ApiError(400, "There are no views and videos of this channel");
+    return res.status(200).json(
+      new ApiResponse(
+        200,
+        {
+          totalViews: 0,
+          totalVids: 0,
+          totalLikes: 0,
+          totalSubs: 0,
+        },
+        "No channel data yet"
+      )
+    );
   }
   const videos = await Video.find({ owner: userId }, { _id: 1 }); //In Mongo:  1 = include this field ,  0 = exclude this field
   const videoIds = videos.map((v) => v._id);
@@ -59,7 +70,9 @@ const getChannelVideos = asyncHandler(async (req, res) => {
   const videos = await Video.find({
     owner: userId,
   });
-
+  if (!videos.length) {
+    return res.status(200).json(new ApiResponse(200, [], "No videos found"));
+  }
   return res
     .status(200)
     .json(new ApiResponse(200, videos, "Here are the videos"));
