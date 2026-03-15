@@ -8,9 +8,8 @@ import { app } from "./app.js";
 
 connectDB()
   .then(() => {
-    app.listen(process.env.PORT || 8000, () => {
-      //starting server on on the given port..without listen...server sleeping
-      console.log(`⚙️ Server is running at port : ${process.env.PORT}`);
+    app.listen(process.env.PORT || 8000, "0.0.0.0", () => {
+      console.log(`⚙️ Server is running at port : ${process.env.PORT || 8000}`);
     });
   })
   .catch((err) => {
